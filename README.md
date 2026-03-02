@@ -23,3 +23,18 @@ Convert any script into a singleton by inheriting:
 public class GameManager : MonoSingletonGeneric<GameManager>
 {
 }
+
+### 2. Generic & Scalable Dialogue System  
+**Author:** [Mayur](https://github.com/M-dev-acc)  
+
+A ScriptableObject-based dialogue framework for building flexible and branching conversations in Unity.
+
+**Highlights:**
+- Data-driven architecture  
+- Supports branching dialogue  
+- Clean separation of data and logic  
+- Easily extendable  
+- Scalable for large narrative systems  
+
+Designed to allow rapid iteration and safe expansion of dialogue trees without modifying the core system logic.  
+New conversations can be added seamlessly while maintaining structural integrity.
