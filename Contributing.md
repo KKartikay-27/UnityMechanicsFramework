@@ -250,7 +250,7 @@ Your demo and supporting files live under `Samples~/`. Follow this structure exa
 
 ```
 Samples~/
-+-- YourMechanicName/
++-- YourMechanicNameSample/
     |
     +-- Assets/
     |   |
@@ -264,7 +264,7 @@ Samples~/
     |       +-- RequiredPrefab.prefab        <- Every required prefab included
     |
     +-- Video/
-    |   +-- Demo.mp4                         <- Your walkthrough video
+    |   +-- [YourMechanicNameTutorial].mp4   <- Named after the mechanic
     |
     +-- ScriptExplainer.txt                  <- Line-by-line code explanation
 ```
@@ -498,7 +498,7 @@ Your video must include all of the following sections (in any order):
 
 ### 11.3 Where to put the video and how to link it
 
-- **Under 100MB** — Place at `Samples~/YourMechanicName/Video/Demo.mp4` and link to it in your README entry using a relative GitHub path
+- **Under 100MB** — Create a `Video` folder inside your sample directory (e.g., `Samples~/YourMechanicNameSample/Video/`) and name your video `[YourMechanicNameTutorial].mp4`. Link to it in your README entry using a relative GitHub path.
 - **Over 100MB** — Upload to YouTube (unlisted is fine) or Google Drive and paste the full URL in:
   - Your README mechanic entry (metadata table + Quick Navigation row)
   - Your PR description
