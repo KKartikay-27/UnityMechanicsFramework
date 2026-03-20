@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "displayName": "Unity Mechanics Framework",
   "description": "Modular open-source gameplay mechanics framework for Unity.",
-  "unity": "6.3",
+  "unity": "2021.3",
   "author": {
     "name": "Shubham B"
+  },
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6"
   }
 }
