@@ -185,6 +185,7 @@ EventBus.Subscribe<PlayerJumpedEvent>(e => audioManager.PlayJumpSound());
 |---|---|---|---|---|
 | 1 | [MonoSingleton Generic](#1-monosingleton-generic) | Shubham B | Core | — |
 | 2 | [Generic & Scalable Dialogue System](#2-generic--scalable-dialogue-system) | Mayur | Dialogue | [▶ Watch](https://github.com/vijit101/UnityMechanicsFramework/tree/main/RuntimeMechanics/Dailogue/2.%20GenericAndScalableDialogueSystem/Assets/Video%20tutorial) |
+| 3 | [Scene Manager System](#3-scene-manager-system) | [Nymish](https://github.com/nymishkash) | Systems | [▶ Watch](https://drive.google.com/drive/folders/1HOWvDidtblCiPr0jmjZSg28P-6Ywd105?usp=sharing) |
 
 *More mechanics are added with every merged PR. [Contribute yours →](#9-how-to-contribute)*
 
@@ -271,6 +272,55 @@ dialogueSystem.StartDialogue(npcDatabase, onComplete: () =>
 - Clean separation between data (`DialogueDatabase`) and logic (`DialogueSystem`)
 - Add new conversations without touching any existing scripts
 - Scales to large narrative systems without architectural changes
+
+---
+
+### 3. Scene Manager System
+
+| | |
+|---|---|
+| **Author** | [Nymish](https://github.com/nymishkash) |
+| **Namespace** | `GameplayMechanicsUMFOSS.Systems` |
+| **Location** | `Runtime/Systems/1. SceneManagerSystem/SceneManager_UMFOSS.cs` |
+| **Category** | Systems |
+| **Demo Scene** | `Samples~/SceneManagerSample/Assets/Scenes/PersistentScene.unity` |
+| **Video** | [▶ Watch Walkthrough](https://drive.google.com/drive/folders/1HOWvDidtblCiPr0jmjZSg28P-6Ywd105?usp=sharing) |
+
+**What it does**
+
+A centralized async scene management system that solves four real-world problems with Unity's built-in `SceneManager`: main-thread blocking on load, singleton destruction across scene changes, missing fade transitions, and zero support for additive overlay scenes (pause menus, inventory, settings). Ships with a persistent-scene pattern that keeps your singletons alive across every load, fade transitions as ScriptableObject assets, an auto-created fade canvas (zero manual UI setup), a stack-based push/pop API for overlays, and a full EventBus integration so any other system can react to scene transitions without holding a direct reference.
+
+**How to use it**
+
+```csharp
+using GameplayMechanicsUMFOSS.Systems;
+using GameplayMechanicsUMFOSS.Core;
+
+// Step 1: Drop SceneManager_UMFOSS + PersistentScene_UMFOSS onto a bootstrap
+//         GameObject in your persistent scene. Set persistentSceneName + a default
+//         SceneTransition asset in the inspector. The fade canvas is created
+//         automatically on Awake — no manual UI wiring needed.
+
+// Step 2: Load a scene with a fade transition
+SceneManager_UMFOSS.Instance.LoadScene("Level_01", fadeBlack);
+
+// Step 3: Push an overlay (pause menu, inventory, settings)
+SceneManager_UMFOSS.Instance.Push("PauseMenu");
+SceneManager_UMFOSS.Instance.Pop(); // close it
+
+// Step 4: React to scene events from anywhere via the EventBus
+EventBus.Subscribe<SceneLoadCompleteEvent>(e => Debug.Log($"Loaded {e.sceneName}"));
+EventBus.Subscribe<SceneLoadProgressEvent>(e => loadingBar.fillAmount = e.progress);
+```
+
+**Highlights**
+
+- **Async-first** — `LoadSceneMode.Additive` + `allowSceneActivation = false` until 90% means no main-thread freeze and no half-loaded flashes
+- **Persistent scene pattern** — your `AudioManager`, `SaveSystem`, and HUD singletons survive every transition without scattered `DontDestroyOnLoad` calls
+- **Auto-created fade canvas** — drop the prefab in any scene, call `LoadScene`, fades just work; zero inspector wiring required
+- **Push / Pop scene stacking** — pause menus, inventory, settings overlays additively load on top of gameplay without unloading the world beneath
+- **Seven EventBus events fire across the load lifecycle** — `SceneLoadStart`, `SceneLoadProgress`, `SceneLoadComplete`, `ScenePushed`, `ScenePopped`, `SceneReloaded`, `InputLock` — every other mechanic can hook in without coupling
+- **Ships with a full SLITHER snake game demo** — three levels, pause/stats overlays, game-over and victory screens — proving every API surface in a real game flow
 
 ---
 
