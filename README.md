@@ -284,7 +284,7 @@ dialogueSystem.StartDialogue(npcDatabase, onComplete: () =>
 | **Location** | `Runtime/Systems/1. SceneManagerSystem/SceneManager_UMFOSS.cs` |
 | **Category** | Systems |
 | **Demo Scene** | `Samples~/SceneManagerSample/Assets/Scenes/PersistentScene.unity` |
-| **Video** | [▶ Watch Walkthrough](https://drive.google.com/drive/folders/1HOWvDidtblCiPr0jmjZSg28P-6Ywd105?usp=sharing) |
+| **Video** | [▶ Watch Walkthrough](https://drive.google.com/drive/folders/1HOWvDidtblCiPr0jmjZSg28P-6Ywd105?usp=sharing) · Also available in `Samples~/SceneManagerSample/Video/` |
 
 **What it does**
 
