@@ -41,13 +41,13 @@ The system uses the `EventBus` so other mechanics can react to scene transitions
    - **Top-left HUD shows the persistent counter** — it never resets across any transition (proves the persistent scene pattern)
    - Test pausing while the loading bar is showing — the loading screen continues to fade in/out correctly because the system uses `WaitForSecondsRealtime` (immune to `Time.timeScale = 0`)
 
+Alternatively, extract `Samples~/SceneManagerSample/SceneManagerSystemCompleteProject.zip` — it is a standalone Unity project you can open and press Play.
+
 ## Demo Video
 
-▶ **Walkthrough:** [Google Drive folder](https://drive.google.com/drive/folders/1HOWvDidtblCiPr0jmjZSg28P-6Ywd105?usp=sharing)
-
-Videos are also included in the repo at `Samples~/SceneManagerSample/Video/`:
-- `SceneManagerDemo_Basic.mp4` — Basic scene manager with button-driven transitions
-- `SceneManagerDemo_Slither.mp4` — Full SLITHER snake game demo
+▶ **Walkthrough videos** are inside the repo at `Samples~/SceneManagerSample/Video/`:
+- `SceneManagerDemo_Basic.mp4` — basic API walkthrough
+- `SceneManagerDemo_Slither.mp4` — full SLITHER game demo
 
 ## Namespace used
 
@@ -65,17 +65,23 @@ Runtime/Systems/1. SceneManagerSystem/
 ├── EventBus.cs                   ← shared static pub/sub used by the events
 └── ScriptExplainer.txt           ← line-by-line explainer covering the why, not just the what
 
-Samples~/SceneManagerSample/Assets/
-├── Scenes/        (10 scenes — title, 3 levels, pause, stats, settings, game over, victory, persistent)
-├── Scripts/       (19 gameplay scripts — Snake, Pickup/Apple/Bomb, FoodSpawner, GameStats, controllers, HUD)
-├── Transitions/   (4 SceneTransition assets — Instant, FadeBlack, FadeWhite, LoadingBar)
-├── Resources/     (Apple, Bomb, WhiteCircle for runtime Resources.Load fallback)
-├── Apple.png  Bomb.png  Checkerboard.png  Grid.png  RoundedSquare.png  WhiteCircle.png  WhiteSquare.png
+Samples~/SceneManagerSample/
+├── SceneManagerSystemCompleteProject.zip   ← complete standalone Unity project
+├── ScriptExplainer.txt                     ← line-by-line code explanation
+├── Video/
+│   ├── SceneManagerDemo_Basic.mp4
+│   └── SceneManagerDemo_Slither.mp4
+├── Assets/
+│   ├── Scenes/        (10 scenes — title, 3 levels, pause, stats, settings, game over, victory, persistent)
+│   ├── Scripts/       (19 gameplay scripts — Snake, Pickup/Apple/Bomb, FoodSpawner, GameStats, controllers, HUD)
+│   ├── Transitions/   (4 SceneTransition assets — Instant, FadeBlack, FadeWhite, LoadingBar)
+│   ├── Resources/     (Apple, Bomb, WhiteCircle for runtime Resources.Load fallback)
+│   └── Apple.png  Bomb.png  Checkerboard.png  Grid.png  RoundedSquare.png  WhiteCircle.png  WhiteSquare.png
 ```
 
 ## README entry
 
-A new mechanic card has been added at `README.md` Section 6 (Mechanics Library) as entry **#3 — Scene Manager System**, plus a new row in the Quick Navigation table linking to the Google Drive walkthrough.
+A new mechanic card has been added at `README.md` Section 6 (Mechanics Library) as entry **#3 — Scene Manager System**, plus a new row in the Quick Navigation table linking to the video files in the repo.
 
 ## Acceptance criteria coverage (from Issue #21)
 
@@ -95,10 +101,10 @@ A new mechanic card has been added at `README.md` Section 6 (Mechanics Library) 
 | `WaitForSecondsRealtime` works with `Time.timeScale = 0` | ✅ | Pause uses `Time.timeScale = 0`, fades + loading still animate correctly |
 | Fade canvas auto-created on Awake | ✅ | `CreateFadeCanvas()` in `SceneManager_UMFOSS.Awake` |
 | Three default transitions shipped (Instant, FadeBlack, FadeWhite) | ✅ | `Samples~/SceneManagerSample/Assets/Transitions/` (plus `LoadingBar.asset` for the loading-screen variant) |
-| `ScriptExplainer.txt` included | ✅ | `Runtime/Systems/1. SceneManagerSystem/ScriptExplainer.txt` |
+| `ScriptExplainer.txt` included | ✅ | `Runtime/Systems/1. SceneManagerSystem/ScriptExplainer.txt` + `Samples~/SceneManagerSample/ScriptExplainer.txt` |
 | Demo scene shows all four operations working | ✅ | SLITHER demo: LoadScene (level → level), Push (Esc pause), Pop (Resume), Reload (Restart Level) |
-| Demo video included | ✅ | Linked above |
-| Video link in README | ✅ | Quick Nav row + mechanic card |
+| Demo video included | ✅ | `Samples~/SceneManagerSample/Video/` |
+| Video link in README | ✅ | Quick Nav row + mechanic card (relative repo path) |
 | README Quick Navigation row added | ✅ | `README.md` |
 | README full mechanic card added | ✅ | `README.md` |
 
@@ -109,9 +115,10 @@ A new mechanic card has been added at `README.md` Section 6 (Mechanics Library) 
 - [x] Namespace `GameplayMechanicsUMFOSS.Systems`
 - [x] No magic numbers, no direct cross-mechanic dependencies
 - [x] Public APIs have XML `<summary>` documentation
-- [x] `ScriptExplainer.txt` present and explains the *why*, not just the *what*
+- [x] `ScriptExplainer.txt` present in both `Runtime/` and `Samples~/`
 - [x] Demo scene runs immediately on Play with no missing references
 - [x] Three default transition assets shipped (Instant, FadeBlack, FadeWhite) — plus a fourth (LoadingBar) for the loading screen variant
-- [x] Demo video linked
+- [x] Demo video inside repo at `Samples~/SceneManagerSample/Video/` (no external links)
+- [x] Complete project ZIP included at `Samples~/SceneManagerSample/SceneManagerSystemCompleteProject.zip`
 - [x] README Quick Navigation row added with working anchor and video link
 - [x] README full mechanic card added (metadata table, what it does, code example, highlights)
