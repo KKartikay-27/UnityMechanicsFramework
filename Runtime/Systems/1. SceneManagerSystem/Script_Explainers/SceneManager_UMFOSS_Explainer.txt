@@ -148,17 +148,17 @@ Explain : Walks every entry in Build Settings, strips the path down to a
           built-in error message is unhelpful.
 
 ----------------------------------------------------
-EVENT REFERENCE
+PUBLIC API REFERENCE
 ----------------------------------------------------
 
-SceneLoadStartEvent     - fires when a load begins (fromScene, toScene)
-SceneLoadProgressEvent  - fires every frame during async load (0..1)
-SceneLoadCompleteEvent  - fires when the new scene is fully active and faded in
-ScenePushedEvent        - fires after a scene is pushed onto the stack
-ScenePoppedEvent        - fires after the top scene is popped
-SceneReloadedEvent      - fires after the current scene reloads
-InputLockEvent          - fires at start (locked=true) and end (locked=false)
-                          of every transition. Player input subscribes to this.
+LoadScene(name, transition?)   - Replace current scene; persistent scene stays.
+Push(name, transition?)        - Additively load on top (overlays, pause menus).
+Pop(transition?)               - Unload the top of the stack and resume below.
+ReloadScene(transition?)       - Re-load the current scene cleanly.
+GetCurrentScene()              - Name of the active (top of stack) scene.
+IsTransitioning()              - True while a load/push/pop is in progress.
+IsSceneLoaded(name)            - Query whether a scene is currently loaded.
+GetStackDepth()                - Current size of the additive stack.
 
 ----------------------------------------------------
 SETUP SUMMARY

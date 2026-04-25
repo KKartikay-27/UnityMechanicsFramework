@@ -19,9 +19,9 @@ The system uses the `EventBus` so other mechanics can react to scene transitions
 
 ## How to test it
 
-1. Open the project in **Unity 2021.3 LTS or later**
-2. Open `Samples~/SceneManagerSample/Assets/Scenes/PersistentScene.unity`
-3. Add all scenes from `Samples~/SceneManagerSample/Assets/Scenes/` to **File → Build Settings**, with `PersistentScene` at index `0`
+1. Extract `Samples~/SceneManagerSample/SceneManagerSystemCompleteProject.zip` somewhere on disk and open the resulting folder in **Unity 2021.3 LTS or later**
+2. Open `Assets/Scenes/PersistentScene.unity`
+3. Confirm every scene under `Assets/Scenes/` is in **File → Build Settings** with `PersistentScene` at index `0` (the zip already ships this configured)
 4. Press **Play** in `PersistentScene`
 5. Click **START GAME** on the title screen
 6. The **SLITHER** snake game runs end-to-end across three levels:
@@ -41,13 +41,12 @@ The system uses the `EventBus` so other mechanics can react to scene transitions
    - **Top-left HUD shows the persistent counter** — it never resets across any transition (proves the persistent scene pattern)
    - Test pausing while the loading bar is showing — the loading screen continues to fade in/out correctly because the system uses `WaitForSecondsRealtime` (immune to `Time.timeScale = 0`)
 
-Alternatively, extract `Samples~/SceneManagerSample/SceneManagerSystemCompleteProject.zip` — it is a standalone Unity project you can open and press Play.
-
 ## Demo Video
 
-▶ **Walkthrough videos** are inside the repo at `Samples~/SceneManagerSample/Video/`:
+▶ **Walkthrough videos** are bundled inside the repo at `Samples~/SceneManagerSample/SceneManagerVideos.zip`:
 - `SceneManagerDemo_Basic.mp4` — basic API walkthrough
 - `SceneManagerDemo_Slither.mp4` — full SLITHER game demo
+- `SceneManagerDemo_Walkthrough.mp4` — scripts overview, prefab setup from scratch, and end-to-end mechanic flow
 
 ## Namespace used
 
@@ -57,26 +56,24 @@ Alternatively, extract `Samples~/SceneManagerSample/SceneManagerSystemCompletePr
 
 ```
 Runtime/Systems/1. SceneManagerSystem/
-├── SceneManager_UMFOSS.cs        ← main coordinator + auto fade canvas + scene validation
-├── SceneTransition_UMFOSS.cs     ← ScriptableObject (fade colour, durations, loading screen flag)
-├── PersistentScene_UMFOSS.cs     ← marks a scene as never-unload
-├── LoadingScreen_UMFOSS.cs       ← optional loading screen UI subscriber
-├── SceneEvents.cs                ← all 7 event structs
-├── EventBus.cs                   ← shared static pub/sub used by the events
-└── ScriptExplainer.txt           ← line-by-line explainer covering the why, not just the what
+├── Scripts/
+│   ├── SceneManager_UMFOSS.cs        ← main coordinator + auto fade canvas + scene validation
+│   ├── SceneTransition_UMFOSS.cs     ← ScriptableObject (fade colour, durations, loading screen flag)
+│   ├── PersistentScene_UMFOSS.cs     ← marks a scene as never-unload
+│   ├── LoadingScreen_UMFOSS.cs       ← optional loading screen UI subscriber
+│   ├── SceneEvents.cs                ← all 7 event structs
+│   └── EventBus.cs                   ← shared static pub/sub used by the events
+└── Script_Explainers/                ← one line-by-line explainer per script
+    ├── SceneManager_UMFOSS_Explainer.txt
+    ├── SceneTransition_UMFOSS_Explainer.txt
+    ├── PersistentScene_UMFOSS_Explainer.txt
+    ├── LoadingScreen_UMFOSS_Explainer.txt
+    ├── SceneEvents_Explainer.txt
+    └── EventBus_Explainer.txt
 
 Samples~/SceneManagerSample/
-├── SceneManagerSystemCompleteProject.zip   ← complete standalone Unity project
-├── ScriptExplainer.txt                     ← line-by-line code explanation
-├── Video/
-│   ├── SceneManagerDemo_Basic.mp4
-│   └── SceneManagerDemo_Slither.mp4
-├── Assets/
-│   ├── Scenes/        (10 scenes — title, 3 levels, pause, stats, settings, game over, victory, persistent)
-│   ├── Scripts/       (19 gameplay scripts — Snake, Pickup/Apple/Bomb, FoodSpawner, GameStats, controllers, HUD)
-│   ├── Transitions/   (4 SceneTransition assets — Instant, FadeBlack, FadeWhite, LoadingBar)
-│   ├── Resources/     (Apple, Bomb, WhiteCircle for runtime Resources.Load fallback)
-│   └── Apple.png  Bomb.png  Checkerboard.png  Grid.png  RoundedSquare.png  WhiteCircle.png  WhiteSquare.png
+├── SceneManagerSystemCompleteProject.zip   ← complete standalone Unity project (Assets/ + ProjectSettings/ + Packages/)
+└── SceneManagerVideos.zip                  ← demo + walkthrough videos
 ```
 
 ## README entry
@@ -100,10 +97,10 @@ A new mechanic card has been added at `README.md` Section 6 (Mechanics Library) 
 | Scene name not in Build Settings logs clear error, no crash | ✅ | `IsSceneInBuildSettings` validation |
 | `WaitForSecondsRealtime` works with `Time.timeScale = 0` | ✅ | Pause uses `Time.timeScale = 0`, fades + loading still animate correctly |
 | Fade canvas auto-created on Awake | ✅ | `CreateFadeCanvas()` in `SceneManager_UMFOSS.Awake` |
-| Three default transitions shipped (Instant, FadeBlack, FadeWhite) | ✅ | `Samples~/SceneManagerSample/Assets/Transitions/` (plus `LoadingBar.asset` for the loading-screen variant) |
-| `ScriptExplainer.txt` included | ✅ | `Runtime/Systems/1. SceneManagerSystem/ScriptExplainer.txt` + `Samples~/SceneManagerSample/ScriptExplainer.txt` |
+| Three default transitions shipped (Instant, FadeBlack, FadeWhite) | ✅ | Inside `SceneManagerSystemCompleteProject.zip` → `Assets/SceneTransitions/` (plus `LoadingBar.asset` for the loading-screen variant) |
+| Per-script explainer included | ✅ | `Runtime/Systems/1. SceneManagerSystem/Script_Explainers/` (one file per script) |
 | Demo scene shows all four operations working | ✅ | SLITHER demo: LoadScene (level → level), Push (Esc pause), Pop (Resume), Reload (Restart Level) |
-| Demo video included | ✅ | `Samples~/SceneManagerSample/Video/` |
+| Demo video included | ✅ | `Samples~/SceneManagerSample/SceneManagerVideos.zip` |
 | Video link in README | ✅ | Quick Nav row + mechanic card (relative repo path) |
 | README Quick Navigation row added | ✅ | `README.md` |
 | README full mechanic card added | ✅ | `README.md` |
@@ -115,10 +112,10 @@ A new mechanic card has been added at `README.md` Section 6 (Mechanics Library) 
 - [x] Namespace `GameplayMechanicsUMFOSS.Systems`
 - [x] No magic numbers, no direct cross-mechanic dependencies
 - [x] Public APIs have XML `<summary>` documentation
-- [x] `ScriptExplainer.txt` present in both `Runtime/` and `Samples~/`
+- [x] One Script Explainer per script in `Runtime/Systems/1. SceneManagerSystem/Script_Explainers/`
 - [x] Demo scene runs immediately on Play with no missing references
 - [x] Three default transition assets shipped (Instant, FadeBlack, FadeWhite) — plus a fourth (LoadingBar) for the loading screen variant
-- [x] Demo video inside repo at `Samples~/SceneManagerSample/Video/` (no external links)
-- [x] Complete project ZIP included at `Samples~/SceneManagerSample/SceneManagerSystemCompleteProject.zip`
+- [x] Walkthrough videos zipped inside repo at `Samples~/SceneManagerSample/SceneManagerVideos.zip` (no external links)
+- [x] Complete project ZIP included at `Samples~/SceneManagerSample/SceneManagerSystemCompleteProject.zip` (contains `Assets/`, `ProjectSettings/`, `Packages/` only)
 - [x] README Quick Navigation row added with working anchor and video link
 - [x] README full mechanic card added (metadata table, what it does, code example, highlights)

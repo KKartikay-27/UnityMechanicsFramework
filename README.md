@@ -187,7 +187,7 @@ EventBus.Subscribe<PlayerJumpedEvent>(e => audioManager.PlayJumpSound());
 | 2 | [Generic & Scalable Dialogue System](#2-generic--scalable-dialogue-system) | Mayur | Dialogue | [▶ Watch]
 | 64 | [Utils](#64-Utils) | [Shubham ](https://github.com/vijit101) | Core | [▶ Watch]() |
 (https://github.com/vijit101/UnityMechanicsFramework/tree/main/RuntimeMechanics/Dailogue/2.%20GenericAndScalableDialogueSystem/Assets/Video%20tutorial) |
-| 3 | [Scene Manager System](#3-scene-manager-system) | [Nymish](https://github.com/nymishkash) | Systems | [▶ Watch](Samples~/SceneManagerSample/Video/) |
+| 3 | [Scene Manager System](#3-scene-manager-system) | [Nymish](https://github.com/nymishkash) | Systems | [▶ Watch](Samples~/SceneManagerSample/SceneManagerVideos.zip) |
 
 *More mechanics are added with every merged PR. [Contribute yours →](#9-how-to-contribute)*
 
@@ -327,10 +327,11 @@ dialogueSystem.StartDialogue(npcDatabase, onComplete: () =>
 |---|---|
 | **Author** | [Nymish](https://github.com/nymishkash) |
 | **Namespace** | `GameplayMechanicsUMFOSS.Systems` |
-| **Location** | `Runtime/Systems/1. SceneManagerSystem/SceneManager_UMFOSS.cs` |
+| **Location** | `Runtime/Systems/1. SceneManagerSystem/Scripts/` |
+| **Script Explainers** | `Runtime/Systems/1. SceneManagerSystem/Script_Explainers/` (one per script) |
 | **Category** | Systems |
-| **Demo Scene** | `Samples~/SceneManagerSample/Assets/Scenes/PersistentScene.unity` |
-| **Video** | [▶ Watch Walkthrough](Samples~/SceneManagerSample/Video/) |
+| **Sample Project** | `Samples~/SceneManagerSample/SceneManagerSystemCompleteProject.zip` (extract & open in Unity) |
+| **Video** | [▶ Watch Walkthrough](Samples~/SceneManagerSample/SceneManagerVideos.zip) |
 
 **What it does**
 
